@@ -1,0 +1,10 @@
+@mixin x-container($max-width: var(--wrap), $padding: var(--padding)) {
+    max-width: calc((#{$max-width} + #{$padding} * 2) / var(--font-size-default) * 1rem);
+    padding-left: px-to-rem($padding);
+    padding-right: px-to-rem($padding);
+}
+
+@function px-to-rem($value) {
+    $res: calc(#{$value} / var(--font-size-default) * 1rem);
+    @return $res;
+}
