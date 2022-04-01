@@ -32,11 +32,16 @@ textarea {
     color: inherit;
     font-family: inherit;
     font-size: inherit;
-    border: none;
     background: transparent;
     text-decoration: transparent;
+    outline: 1px solid transparent;
+    transition: outline .3s ease-out;
     &::placeholder {
         color: inherit;
+    }
+    &:focus {
+        outline: 1px solid var(--color-black);
+        transition: outline .3s ease-in;
     }
 }
 option,
@@ -46,10 +51,9 @@ button {
 }
 a {
     color: inherit;
-    text-decoration: transparent;
     cursor: pointer;
-    color: inherit;
     font-size: inherit;
+    text-decoration-color: transparent;
 }
 picture {
     line-height: 0;
@@ -61,24 +65,8 @@ html, body {
     height: 100%;
     width: 100%;
 }
-@function toRem($value) {
-    $remValue: ($value / 16) + rem;
-    @return $remValue;
-}
-@mixin test($value) {
-    font-size: $value;
-}
-@mixin x-container($max-width: var(--wrap), $padding: var(--padding)) {
-    max-width: calc((#{$max-width} + #{$padding} * 2) / var(--font-size-default));
-    padding-left: $padding;
-    padding-right: $padding;
-}
 html {
-    @include test(16px);
-    @include x-container();
-    min-width: px-to-rem(320);
-    //min-width: px-to-rem(var(--min-width));
-    //min-width: calc(var(--min-width) / var(--font-size-default) * 1rem);
+    min-width: var(--min-width);
     overflow-x: hidden;
 }
 body {
