@@ -30,32 +30,14 @@ import UiModal from '@/components/ui/uiModal.vue';
 import FormTodo from '@/components/FormTodo.vue';
 import UiSelect from '@/components/ui/uiSelect.vue';
 import TodoList from '@/components/TodoList.vue';
+import axios from 'axios';
 export default {
     name: 'Home-page',
     components: { UiModal, FormTodo, UiSelect, TodoList },
     data() {
         return {
             isModalVisible: false,
-            tasks: [
-                {
-                    userId: 1,
-                    id: 1,
-                    title: 'delectus aut autem',
-                    completed: true,
-                },
-                {
-                    userId: 1,
-                    id: 2,
-                    title: 'quis ut nam facilis et officia qui',
-                    completed: false,
-                },
-                {
-                    userId: 1,
-                    id: 3,
-                    title: 'fugiat veniam minus',
-                    completed: false,
-                },
-            ],
+            tasks: [],
             selectedSort: 'all',
             tasksFilters: [
                 { name: 'Все', value: 'all' },
@@ -81,8 +63,24 @@ export default {
         removeCompletedTasks() {
             this.tasks = this.tasks.filter((item) => !item.completed);
         },
+        async fetchTasks() {
+            try {
+                const res = await axios(
+                    'https://jsonplaceholder.typicode.com/todos',
+                    {
+                        params: {
+                            _limit: 10,
+                        },
+                    }
+                );
+                this.tasks = res.data;
+            } catch (e) {
+                console.log('Fetch error', e);
+            }
+        },
     },
     mounted() {
+        this.fetchTasks();
         window.addEventListener('keypress', (event) => {
             if (event.code === 'Enter') {
                 this.modalOpen();
