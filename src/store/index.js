@@ -1,8 +1,10 @@
+import themeStore from "@/store/themeStore";
+import todoStore from "@/store/todoStore";
 import { createStore } from "vuex";
 
 export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+    modules: {
+        theme: themeStore,
+        todo: todoStore
+    }
 });
