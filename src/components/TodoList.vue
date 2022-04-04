@@ -5,7 +5,6 @@
                 v-for="task in tasks"
                 :key="task.id"
                 :task="task"
-                @complete="complete"
             ></todo-item>
         </transition-group>
     </ul>
@@ -19,12 +18,7 @@ export default {
     props: {
         tasks: {
             type: Array,
-            // required: true,
-        },
-    },
-    methods: {
-        complete(event, task) {
-            this.$emit('complete', event, task);
+            required: true,
         },
     },
 };

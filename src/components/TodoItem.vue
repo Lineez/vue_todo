@@ -1,6 +1,5 @@
 <template>
     <li class="todo__item">
-        <span>{{ task.id }})</span>
         <div>{{ task.title }}</div>
         <label :for="'todo-checkbox' + task.id">
             {{ this.task.completed ? 'Uncomplete' : 'Complete' }}
@@ -15,16 +14,21 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
     props: {
         task: {
             type: Object,
-            // required: true,
+            required: true,
         },
     },
     methods: {
+        ...mapMutations({
+            updateTaskComplete: 'todo/updateTaskComplete',
+        }),
         completeTask(event) {
-            this.$emit('complete', event.target.checked, this.task);
+            this.task.completed = event.target.checked;
+            this.updateTaskComplete(this.task);
         },
     },
 };
