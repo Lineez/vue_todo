@@ -1,6 +1,7 @@
 <template>
     <section class="todo">
         <h1 class="todo__title">Todo list. Now {{ totalCount }}</h1>
+        <h2 class="todo__subtitle">Tasks fetch if empty for example</h2>
         <div class="todo__head">
             <ui-select
                 @update:model-value="setSelectedSort"
@@ -73,6 +74,9 @@ export default {
         });
     },
     mounted() {
+        if (this.$store.state.todo.tasks.length == 0) {
+            this.fetchTasks();
+        }
         window.addEventListener('keypress', (event) => {
             if (event.code === 'Enter') {
                 this.modalOpen();
@@ -105,6 +109,12 @@ export default {
         font-size: 3rem;
         text-align: center;
         color: var(--color-green);
+    }
+    // todo__subtitle
+    &__subtitle {
+        margin-bottom: 0.625rem;
+        font-size: 1.2rem;
+        text-align: center;
     }
     // todo__head
     &__head {
