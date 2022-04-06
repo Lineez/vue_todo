@@ -39,9 +39,9 @@ export default {
         removeCompletedTasks(state) {
             state.tasks = state.tasks.filter((item) => !item.completed);
         },
-        updateTaskComplete(state, task) {
+        updateTaskComplete(state, [task, checked]) {
             state.tasks.forEach(item => {
-                if (item.id == task.id) item.completed = task.completed
+                if (item.id == task.id) item.completed = checked
             })
         }
     },

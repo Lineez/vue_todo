@@ -27,8 +27,7 @@ export default {
             updateTaskComplete: 'todo/updateTaskComplete',
         }),
         completeTask(event) {
-            this.task.completed = event.target.checked;
-            this.updateTaskComplete(this.task);
+            this.updateTaskComplete([this.task, event.target.checked]);
         },
     },
 };
