@@ -1,7 +1,7 @@
 <template>
     <nav>
         <ul>
-            <template v-for="(link, i) in links" :key="i">
+            <template v-for="link in links" :key="link.name">
                 <li>
                     <router-link :to="link.path">{{ link.name }}</router-link>
                 </li>
